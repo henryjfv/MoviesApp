@@ -1,25 +1,11 @@
 import axios from 'axios'
-export const baseApi = (
-    { method,
+export const baseApi = ({ url }) => {
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
         url,
-        data = {},
-        header = {
-            'content-type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE'
-        }
-    }
-) => {
-    const response = data || method === 'get'
-        ? axios({
-            method,
-            url,
-            data,
-            headers: {
-                ...header
-            }
-        })
-        : {}
-    return response
+        headers: {}
+    };
+
+    return axios.request(config);
 } 
