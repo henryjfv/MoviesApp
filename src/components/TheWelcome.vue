@@ -36,7 +36,13 @@ export default {
               <v-progress-circular indeterminate color="grey-lighten-5"></v-progress-circular>
             </v-row>
           </template>
-          <p style="backdrop-filter: blur(10px); color: white">{{ n?.Title }}</p>
+          <div
+            style="backdrop-filter: blur(10px); color: white"
+          >
+            <p>{{ n?.Title }}</p>
+            <p>Year {{ n?.Year }}</p>
+            <p>Type {{ n?.Type }}</p>
+          </div>
         </v-img>
       </v-col>
     </v-row>
