@@ -3,8 +3,8 @@ import { baseApi } from "./baseApi"
 
 export const getMovies = async ({ query }) => {
     try {
-        const response = await baseApi({ url: `${BASE_API}/?apikey=${API_KEY}&s=${query}` })
-        return JSON.stringify(response.data);
+        const { data } = await baseApi({ url: `${BASE_API}/?apikey=${API_KEY}&s=${query}&type=movie` })
+        return data
     } catch (error) {
         console.log('🚀 ~ file: movies.js:10 ~ getMovies ~ error:', error)
         return error

@@ -3,112 +3,46 @@ import { getMovies } from './../services/movies'
 export default {
   data: () => ({
     query: '',
-    movies: [
-      {
-        Title: 'Harry Potter and the Deathly Hallows: Part 2',
-        Year: '2011',
-        imdbID: 'tt1201607',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg'
-      },
-      {
-        Title: "Harry Potter and the Sorcerer's Stone",
-        Year: '2001',
-        imdbID: 'tt0241527',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BNmQ0ODBhMjUtNDRhOC00MGQzLTk5MTAtZDliODg5NmU5MjZhXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_SX300.jpg'
-      },
-      {
-        Title: 'Harry Potter and the Chamber of Secrets',
-        Year: '2002',
-        imdbID: 'tt0295297',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BMjE0YjUzNDUtMjc5OS00MTU3LTgxMmUtODhkOThkMzdjNWI4XkEyXkFqcGdeQXVyMTA3MzQ4MTc0._V1_SX300.jpg'
-      },
-      {
-        Title: 'Harry Potter and the Prisoner of Azkaban',
-        Year: '2004',
-        imdbID: 'tt0304141',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BMTY4NTIwODg0N15BMl5BanBnXkFtZTcwOTc0MjEzMw@@._V1_SX300.jpg'
-      },
-      {
-        Title: 'Harry Potter and the Goblet of Fire',
-        Year: '2005',
-        imdbID: 'tt0330373',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BMTI1NDMyMjExOF5BMl5BanBnXkFtZTcwOTc4MjQzMQ@@._V1_SX300.jpg'
-      },
-      {
-        Title: 'Harry Potter and the Order of the Phoenix',
-        Year: '2007',
-        imdbID: 'tt0373889',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BOTA3MmRmZDgtOWU1Ny00ZDc5LWFkN2YtNzNlY2UxZmY0N2IyXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg'
-      },
-      {
-        Title: 'Harry Potter and the Deathly Hallows: Part 1',
-        Year: '2010',
-        imdbID: 'tt0926084',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BMTQ2OTE1Mjk0N15BMl5BanBnXkFtZTcwODE3MDAwNA@@._V1_SX300.jpg'
-      },
-      {
-        Title: 'Harry Potter and the Half-Blood Prince',
-        Year: '2009',
-        imdbID: 'tt0417741',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BNzU3NDg4NTAyNV5BMl5BanBnXkFtZTcwOTg2ODg1Mg@@._V1_SX300.jpg'
-      },
-      {
-        Title: 'Harry Potter 20th Anniversary: Return to Hogwarts',
-        Year: '2022',
-        imdbID: 'tt16116174',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BNTZkNWEyZTgtYzJlOS00OWNiLTgwZjMtZGU5NTRhNDNjOTRhXkEyXkFqcGdeQXVyNjk1Njg5NTA@._V1_SX300.jpg'
-      },
-      {
-        Title: 'Harry Potter and the Forbidden Journey',
-        Year: '2010',
-        imdbID: 'tt1756545',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BNDM0YzMyNGUtMTU1Yy00OTE2LWE5NzYtZDZhMTBmN2RkNjg3XkEyXkFqcGdeQXVyMzU5NjU1MDA@._V1_SX300.jpg'
-      }
-    ]
+    movies: []
   }),
   async mounted() {
-    const response = await getMovies({ query: 'Avatar' })
-    console.log('🚀 ~ file: TheWelcome.vue:10 ~ mounted ~ movies:', response)
+    this.query = 'Harry potter'
+    this.searchMovie()
+  },
+  methods: {
+    async searchMovie() {
+      const { Search } = await getMovies({ query: this.query })
+      this.movies = Search?.sort((a, b) => parseInt(b?.Year) - parseInt(a?.Year))
+    }
   }
 }
 </script>
 <template>
-  <v-img :src="movies[0].Poster" height="500" class="bg-grey-darken-4"></v-img>
-  <v-row>
-    <v-col v-for="n in movies.length - 1" :key="n" class="d-flex child-flex" cols="4">
-      <v-img
-        :src="movies[n]?.Poster"
-        style="margin: 30px"
-        aspect-ratio="1"
-        class="bg-grey-darken-4"
-      >
-        <template v-slot:placeholder>
-          <v-row class="fill-height ma-0" align="center" justify="center">
-            <v-progress-circular indeterminate color="grey-lighten-5"></v-progress-circular>
-          </v-row>
-        </template>
-        <p style="backdrop-filter: blur(10px); color: white">{{ movies[n].Title }}</p>
-      </v-img>
-    </v-col>
-  </v-row>
+  <input type="text" />
+  <v-text-field
+    dark
+    label="Search a movie"
+    v-model="query"
+    @keyup.enter="searchMovie()"
+    :rules="rules"
+    hide-details="auto"
+  ></v-text-field>
+  <div v-if="movies.length > 0">
+    <v-row>
+      <v-col v-for="n in movies" :key="n" class="d-flex child-flex" cols="4">
+        <v-img :src="n?.Poster" style="margin: 30px" aspect-ratio="1" class="bg-grey-darken-4">
+          <template v-slot:placeholder>
+            <v-row class="fill-height ma-0" align="center" justify="center">
+              <v-progress-circular indeterminate color="grey-lighten-5"></v-progress-circular>
+            </v-row>
+          </template>
+          <p style="backdrop-filter: blur(10px); color: white">{{ n?.Title }}</p>
+        </v-img>
+      </v-col>
+    </v-row>
+  </div>
+  <div v-else>
+    <h1 style="color: #fff">Nothing to show</h1>
+  </div>
 </template>
+<style scoped></style>
