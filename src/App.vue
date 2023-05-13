@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 
-import Toolbar from './components/toolbar.vue'
+import Toolbar from './components/toolbar'
 </script>
 <template>
   <Toolbar />
