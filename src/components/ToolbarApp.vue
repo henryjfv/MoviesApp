@@ -29,5 +29,3 @@ export default {
     </v-toolbar>
   </v-card>
 </template>
-<style scoped>
-</style>

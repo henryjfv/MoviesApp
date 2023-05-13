@@ -1,7 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-
-import Toolbar from './components/toolbar'
+import Toolbar from './components/ToolbarApp.vue'
 </script>
 <template>
   <Toolbar />
@@ -12,5 +11,4 @@ import Toolbar from './components/toolbar'
 * {
   background-color: #212121;
 }
-
 </style>
