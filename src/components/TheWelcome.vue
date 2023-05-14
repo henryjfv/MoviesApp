@@ -1,6 +1,10 @@
 <script>
 import { getMovies } from './../services/movies'
+import MovieCard from '../components/MovieCard.vue'
 export default {
+  components: {
+    MovieCard
+  },
   data: () => ({
     query: '',
     movies: []
@@ -27,28 +31,17 @@ export default {
     :rules="rules"
     hide-details="auto"
   ></v-text-field>
-  <div v-if="movies.length > 0">
-    <v-row>
-      <v-col v-for="n in movies" :key="n" class="d-flex child-flex" cols="4">
-        <v-img :src="n?.Poster" style="margin: 30px" aspect-ratio="1" class="bg-grey-darken-4">
-          <template v-slot:placeholder>
-            <v-row class="fill-height ma-0" align="center" justify="center">
-              <v-progress-circular indeterminate color="grey-lighten-5"></v-progress-circular>
-            </v-row>
-          </template>
-          <div
-            style="backdrop-filter: blur(10px); color: white"
-          >
-            <p>{{ n?.Title }}</p>
-            <p>Year {{ n?.Year }}</p>
-            <p>Type {{ n?.Type }}</p>
-          </div>
-        </v-img>
-      </v-col>
-    </v-row>
-  </div>
-  <div v-else>
-    <h1 style="color: #fff">Nothing to show</h1>
-  </div>
+  <v-container fluid>
+    <div v-if="movies.length > 0">
+      <v-row>
+        <v-col v-for="n in movies" :key="n" class="d-flex child-flex" cols="10" sm="3">
+          <MovieCard :movie="n" />
+        </v-col>
+      </v-row>
+    </div>
+    <div v-else>
+      <h1 style="color: #fff">Nothing to show</h1>
+    </div>
+  </v-container>
 </template>
 <style scoped></style>
