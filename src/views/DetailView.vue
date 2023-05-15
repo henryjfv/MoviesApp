@@ -14,7 +14,7 @@ _self.value = this
 const items = ref([])
 items.value = JSON.parse(getLocalStorage({ key: 'cart' }))
 
-items.value.map((e) => {
+items.value?.map((e) => {
   return (e.amount = 1)
 })
 
