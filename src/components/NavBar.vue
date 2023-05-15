@@ -1,6 +1,9 @@
 <script setup>
 import Purchases from '../components/Purchases.vue'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const dialog = ref(false)
 
@@ -20,7 +23,7 @@ const openModal = () => {
       <v-toolbar-title
         @click="
           () => {
-            this.$router.push('/')
+            router.push('/')
           }
         "
         >Henry Movies</v-toolbar-title
@@ -30,7 +33,7 @@ const openModal = () => {
         class="ml-2"
         @click="
           () => {
-            this.$router.push('/detail')
+            router.push('/detail')
           }
         "
       >
