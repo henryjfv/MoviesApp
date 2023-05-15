@@ -1,3 +1,18 @@
+<script setup>
+import Purchases from '../components/Purchases.vue'
+import { ref } from 'vue'
+
+const dialog = ref(false)
+
+const eventCloseDialog = (e) => {
+  dialog.value = false
+}
+
+const openModal = () => {
+  dialog.value = true
+}
+</script>
+
 <template>
   <nav>
     <v-app-bar app color="grey-darken-3" dark>
@@ -20,31 +35,12 @@
         "
       >
         Shopping Cart
-        <v-badge color="red" :content="badgeCounter" overlap>
-          <v-icon class="ml-2"> mdi-cart-outline</v-icon>
-        </v-badge>
+        <v-icon class="ml-2"> mdi-cart-outline</v-icon>
+      </v-btn>
+      <v-btn @click="openModal()">
+        <v-icon>mdi-view-list</v-icon>
       </v-btn>
     </v-app-bar>
+    <Purchases :show="dialog" @onClose="eventCloseDialog" />
   </nav>
 </template>
-<script default>
-import { getLocalStorage } from '../utils/localStorage'
-export default {
-  data: () => {
-    itemsOnCart: 0
-  },
-  methods: {
-    getItems() {
-      const items = JSON.parse(getLocalStorage({ key: 'cart' }))
-      return items
-    }
-  },
-  mounted() {},
-  computed: {
-    badgeCounter() {
-      const items = this.getItems()
-      return items?.length
-    }
-  }
-}
-</script>

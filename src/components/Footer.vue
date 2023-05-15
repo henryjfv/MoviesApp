@@ -2,13 +2,13 @@
   <v-footer class="bg-grey-darken-3 text-center d-flex flex-column">
     <div flat tile class="white--text text-conter">
       <v-card-text>
-        <v-btn class="mx-4 white--text" icon>
+        <v-btn class="mx-4 white--text" icon href="https://www.linkedin.com/in/henryjosefernandez-villarreal/" target="_blank">
           <v-icon size="24px">mdi-linkedin</v-icon>
         </v-btn>
-        <v-btn class="mx-4 white--text" icon>
+        <v-btn class="mx-4 white--text" icon href="https://github.com/henryjfv" target="_blank">
           <v-icon size="24px">mdi-github</v-icon>
         </v-btn>
-        <v-btn class="mx-4 white--text" icon>
+        <v-btn class="mx-4 white--text" icon href="https://twitter.com/HEFEVI91" target="_blank">
           <v-icon size="24px">mdi-twitter</v-icon>
         </v-btn>
       </v-card-text>
@@ -27,4 +27,3 @@
     </div>
   </v-footer>
 </template>
-<script default></script>

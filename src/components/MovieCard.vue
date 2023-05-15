@@ -1,3 +1,30 @@
+<script default>
+import { setLocalStorage, getLocalStorage } from '../utils/localStorage'
+export default {
+  props: {
+    movie: {
+      required: true
+    }
+  },
+  methods: {
+    setItemToShoppingCart() {
+      const itemsInCart = getLocalStorage({ key: 'cart' })
+      if (itemsInCart) {
+        const arrayItems = JSON.parse(itemsInCart)
+        const exist = arrayItems.find((e) => e.Title == this.movie.Title)
+        if (!exist) {
+          setLocalStorage({ key: 'cart', value: JSON.stringify([...arrayItems, this.movie]) })
+          this.$emit('onAddedToCart', true)
+        }
+      } else {
+        setLocalStorage({ key: 'cart', value: JSON.stringify([this.movie]) })
+        this.$emit('onAddedToCart', true)
+      }
+    }
+  }
+}
+</script>
+
 <template>
   <div>
     <v-hover v-slot="{ isHovering, props }">
@@ -45,25 +72,3 @@
     </v-hover>
   </div>
 </template>
-<script default>
-import { setLocalStorage, getLocalStorage } from '../utils/localStorage'
-export default {
-  props: {
-    movie: {
-      required: true
-    }
-  },
-  methods: {
-    setItemToShoppingCart() {
-      const itemsInCart = getLocalStorage({ key: 'cart' })
-      if (itemsInCart) {
-        const arrayItems = JSON.parse(itemsInCart)
-        setLocalStorage({ key: 'cart', value: JSON.stringify([...arrayItems, this.movie]) })
-        
-      } else {
-        setLocalStorage({ key: 'cart', value: JSON.stringify([this.movie]) })
-      }
-    }
-  }
-}
-</script>
